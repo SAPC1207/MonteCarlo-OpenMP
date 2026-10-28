@@ -1,0 +1,20 @@
+# ejecutables (se generan al compilar)
+montecarlo
+montecarlo_secuencial
+montecarlo_detalle
+errores
+error_vs_n
+mc_*
+prefijo
+prefijo_scan
+clasificar
+carrera
+carrera_reduction
+reducciones
+armonica
+pi
+costo
+*.o
+# borradores de Word (el informe final va en el PDF)
+*.docx
+~$*
