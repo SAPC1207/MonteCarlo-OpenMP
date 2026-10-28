@@ -1,0 +1,63 @@
+===== Parte 6 - Condiciones de carrera y reduction - Tue Oct 27 23:09:24 -05 2026 =====
+Compilador : gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+nproc      : 12
+CPU        : 12th Gen Intel(R) Core(TM) i5-1235U
+
+----- Compilacion con -Wall -fopenmp -----
+[fin de la compilacion]
+Prueba: reducciones.c SIN -lm (para ver el error de enlazado):
+reducciones.c:(.text+0x65): undefined reference to `sin'
+collect2: error: ld returned 1 exit status
+
+----- 6.1 carrera.c -----
+1 hilo  : suma = 10000000 (esperado 10000000)
+4 hilos, 5 ejecuciones:
+suma = 2217850 (esperado 10000000)
+suma = 2429726 (esperado 10000000)
+suma = 2482521 (esperado 10000000)
+suma = 2663081 (esperado 10000000)
+suma = 2851864 (esperado 10000000)
+12 hilos, 5 ejecuciones:
+suma = 1615314 (esperado 10000000)
+suma = 1069704 (esperado 10000000)
+suma = 1007270 (esperado 10000000)
+suma = 1358593 (esperado 10000000)
+suma = 1633210 (esperado 10000000)
+
+----- 6.2 carrera_reduction.c -----
+4 hilos, 5 ejecuciones:
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+12 hilos, 5 ejecuciones:
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+suma = 10000000 (esperado 10000000)
+
+----- 6.3 reducciones.c -----
+Hilos: 4
+Maximo:    998.994034504336810 998.994034504336810
+Minimo:    -998.994138120639377 -998.994138120639377
+Positivos: 4996414 4996414
+Hilos: 12
+Maximo:    998.994034504336810 998.994034504336810
+Minimo:    -998.994138120639377 -998.994138120639377
+Positivos: 4996414 4996414
+
+----- 6.4 armonica.c con 1, 2, 3, 4, 8 y 12 hilos -----
+1 hilos: 18.99789641385255479
+2 hilos: 18.99789641385300953
+3 hilos: 18.99789641384951722
+4 hilos: 18.99789641384987959
+8 hilos: 18.99789641385189398
+12 hilos: 18.99789641385294559
+Repeticion con 4 hilos (3 veces):
+4 hilos: 18.99789641384988315
+4 hilos: 18.99789641384987959
+4 hilos: 18.99789641384988315
+
+===== Fin. Resultados en resultados_parte6.txt =====
