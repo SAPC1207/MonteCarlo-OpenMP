@@ -1,0 +1,48 @@
+===== Parte 5 - Dependencias entre iteraciones - Tue Oct 27 22:55:26 -05 2026 =====
+Compilador : gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+_OPENMP    : 201511
+nproc      : 12
+CPU        : 12th Gen Intel(R) Core(TM) i5-1235U
+
+----- Compilacion con -Wall -fopenmp (si no aparece nada, no hubo avisos) -----
+[fin de la compilacion]
+
+----- 5.1 prefijo.c con 1, 2, 4, 8 y 12 hilos -----
+p = 1 : a[N-1] = 1000000 (esperado 1000000)
+p = 2 : a[N-1] = 500000 (esperado 1000000)
+p = 4 : a[N-1] = 250000 (esperado 1000000)
+p = 8 : a[N-1] = 125000 (esperado 1000000)
+p = 12 : a[N-1] = 83334 (esperado 1000000)
+
+Repeticion con 4 hilos (3 veces) para ver si cambia:
+a[N-1] = 250000 (esperado 1000000)
+a[N-1] = 250000 (esperado 1000000)
+a[N-1] = 250000 (esperado 1000000)
+
+----- 5.2 clasificar.c, 3 ejecuciones con 4 hilos -----
+a[i] = a[i] * 2    -> diferencias: 0
+a[i] = a[i+1] + 1  -> diferencias: 3
+s = s + a[i]       -> secuencial: 1000000, paralelo: 331843
+---
+a[i] = a[i] * 2    -> diferencias: 0
+a[i] = a[i+1] + 1  -> diferencias: 3
+s = s + a[i]       -> secuencial: 1000000, paralelo: 261603
+---
+a[i] = a[i] * 2    -> diferencias: 0
+a[i] = a[i+1] + 1  -> diferencias: 3
+s = s + a[i]       -> secuencial: 1000000, paralelo: 301341
+---
+
+----- 5.2 clasificar.c con 12 hilos (para comparar) -----
+a[i] = a[i] * 2    -> diferencias: 0
+a[i] = a[i+1] + 1  -> diferencias: 11
+s = s + a[i]       -> secuencial: 1000000, paralelo: 83355
+
+----- EXTRA: suma prefijo correcta con '#pragma omp scan' -----
+p =  1 | a[N-1] = 1000000 (esperado 1000000) | errores: 0
+p =  2 | a[N-1] = 1000000 (esperado 1000000) | errores: 0
+p =  4 | a[N-1] = 1000000 (esperado 1000000) | errores: 0
+p =  8 | a[N-1] = 1000000 (esperado 1000000) | errores: 0
+p = 12 | a[N-1] = 1000000 (esperado 1000000) | errores: 0
+
+===== Fin. Resultados en resultados_parte5.txt =====
