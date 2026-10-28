@@ -1,0 +1,81 @@
+===== Parte II - Tue Oct 27 13:05:33 -05 2026 - semilla base: 20261018 =====
+Nucleos logicos (nproc): 12
+
+----- Compilacion (no debe aparecer ninguna advertencia) -----
+OK
+
+----- II.1 Version secuencial, N = 1e8, 5 ejecuciones -----
+Estimacion de pi : 3.141633
+Error |pi_est-pi|: 4.07e-05
+Tiempo T(1)      : 0.6349 s
+
+Estimacion de pi : 3.141633
+Error |pi_est-pi|: 4.07e-05
+Tiempo T(1)      : 0.6271 s
+
+Estimacion de pi : 3.141633
+Error |pi_est-pi|: 4.07e-05
+Tiempo T(1)      : 0.6388 s
+
+Estimacion de pi : 3.141633
+Error |pi_est-pi|: 4.07e-05
+Tiempo T(1)      : 0.6276 s
+
+Estimacion de pi : 3.141633
+Error |pi_est-pi|: 4.07e-05
+Tiempo T(1)      : 0.6490 s
+
+Mediana de T(1): 0.6349
+
+----- II.2 Version paralela: reproducibilidad con distinto p -----
+p =  1 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.6430 s
+p =  2 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.3299 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.1795 s
+p =  8 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.1092 s
+p = 12 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.1211 s
+
+Tambien con OMP_NUM_THREADS en lugar del argumento:
+p =  3 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2399 s
+
+Inicio de cada hilo (N = 1000, p = 4): separacion de N/p muestras
+  hilo 0 empieza en la muestra 0 (estado 20261018)
+  hilo 1 empieza en la muestra 250 (estado 2537379374)
+  hilo 2 empieza en la muestra 500 (estado 2570370)
+  hilo 3 empieza en la muestra 750 (estado 334209942)
+p =  4 | aciertos = 807 | pi = 3.2280000000 | error = 8.64e-02 | tiempo = 0.0005 s
+
+----- II.3 / II.4 Versiones incorrectas (p = 4), 3 ejecuciones cada una -----
+modo 1 | p = 4 | aciertos = 78545330 | pi = 3.141813 | error = 2.21e-04 | tiempo = 7.436 s
+modo 1 | p = 4 | aciertos = 78543689 | pi = 3.141748 | error = 1.55e-04 | tiempo = 8.696 s
+modo 1 | p = 4 | aciertos = 78543950 | pi = 3.141758 | error = 1.65e-04 | tiempo = 9.760 s
+
+modo 2 | p = 4 | aciertos = 78487893 | pi = 3.139516 | error = 2.08e-03 | tiempo = 4.245 s
+modo 2 | p = 4 | aciertos = 78550861 | pi = 3.142034 | error = 4.42e-04 | tiempo = 0.644 s
+modo 2 | p = 4 | aciertos = 78483650 | pi = 3.139346 | error = 2.25e-03 | tiempo = 4.342 s
+
+modo 3 | p = 4 | aciertos = 78547336 | pi = 3.141893 | error = 3.01e-04 | tiempo = 0.232 s
+modo 3 | p = 4 | aciertos = 78547336 | pi = 3.141893 | error = 3.01e-04 | tiempo = 0.246 s
+modo 3 | p = 4 | aciertos = 78547336 | pi = 3.141893 | error = 3.01e-04 | tiempo = 0.249 s
+
+modo 4 | p = 4 | aciertos = 20291714 | pi = 0.811669 | error = 2.33e+00 | tiempo = 0.734 s
+modo 4 | p = 4 | aciertos = 20556978 | pi = 0.822279 | error = 2.32e+00 | tiempo = 0.772 s
+modo 4 | p = 4 | aciertos = 23808440 | pi = 0.952338 | error = 2.19e+00 | tiempo = 0.717 s
+
+Referencia para el modo 3: 1 hilo con N/4 muestras
+modo 3 | p = 1 | aciertos = 19636834 | pi = 3.141893 | error = 3.01e-04 | tiempo = 0.206 s
+
+----- II.5 Planificacion (p = 4), 3 ejecuciones cada una -----
+schedule(static):
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2331 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2483 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2498 s
+schedule(dynamic) [chunk 1]:
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 4.6250 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 4.5982 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 4.4842 s
+schedule(dynamic,65536):
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2392 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2398 s
+p =  4 | aciertos = 78540833 | pi = 3.1416333200 | error = 4.07e-05 | tiempo = 0.2447 s
+
+===== Fin. Resultados guardados en resultados_parte2.txt =====
